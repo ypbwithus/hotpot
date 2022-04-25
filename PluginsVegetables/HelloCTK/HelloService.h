@@ -13,7 +13,7 @@ public:
     virtual void sayHello() = 0;
 };
 
-#define HelloService_iid "org.commontk.service.demos.HelloService"
+#define HelloService_iid "org.commontk.service.HelloCTK.HelloService"
 Q_DECLARE_INTERFACE(HelloService, HelloService_iid)
 
 //此宏将当前这个接口类声明为接口，后面的一长串就是这个接口的唯一标识。

@@ -5,7 +5,9 @@
 #include <ctkPluginFramework.h>
 #include <ctkPluginException.h>
 #include <ctkPluginContext.h>
-#include "../PluginsVegetables/HelloCTK/HelloService.h"
+// #include "../PluginsVegetables/HelloCTK/HelloService.h"
+#include "../PluginsVegetables/greet/greet_service.h"
+#include "../PluginsVegetables/WelcomeService/welcome_service.h"
 
 using namespace std;
 
@@ -59,18 +61,76 @@ int main(int argc, char *argv[])
         }
     }
 
+    // 0, 一个插件一服务HelloCTK : HelloService
+    // 1, 一个插件多个服务greet : ByeService HelloService
+    // 2, 多个插件一个服务greet : ByeService HelloService
+
     // 主函数框架及插件加载完成后，即可调用插件接口
     // 获取服务引用
-    ctkServiceReference reference = context->getServiceReference<HelloService>();
-    if (reference)
+    // 0, 一个插件一服务HelloCTK : HelloService
+    // 1, 一个插件多个服务greet : ByeService HelloService
+    // ctkServiceReference reference = context->getServiceReference<HelloService>();
+    // if (reference)
+    // {
+    //     // 获取指定 ctkServiceReference 引用的服务对象,可以直接调用到服务类的引用
+    //     // HelloService* service = qobject_cast<HelloService*>(context->getService(reference));
+    //     HelloService *service = qobject_cast<HelloService *>(context->getService(reference));
+    //     if (service != Q_NULLPTR)
+    //     {
+    //         // 调用服务
+    //         service->sayHello();
+    //     }
+    // }
+
+    // reference = context->getServiceReference<ByeService>();
+    // if (reference)
+    // {
+    //     ByeService *service = qobject_cast<ByeService *>(context->getService(reference));
+    //     if (service != Q_NULLPTR)
+    //         service->sayBye();
+    // }
+
+    // 2 多个插件一个服务greet : ByeService HelloService
+    qDebug() << "********************";
+
+    // 1. 获取所有服务
+    QList<ctkServiceReference> refs = context->getServiceReferences<WelcomeService>();
+    foreach (ctkServiceReference ref, refs)
     {
-        // 获取指定 ctkServiceReference 引用的服务对象,可以直接调用到服务类的引用
-        HelloService *service = qobject_cast<HelloService *>(context->getService(reference));
-        if (service != Q_NULLPTR)
+        if (ref)
         {
-            // 调用服务
-            service->sayHello();
+            qDebug() << "Name:" << ref.getProperty("name").toString()
+                     << "Service ranking:" << ref.getProperty(ctkPluginConstants::SERVICE_RANKING).toLongLong()
+                     << "Service id:" << ref.getProperty(ctkPluginConstants::SERVICE_ID).toLongLong();
+            WelcomeService *service = qobject_cast<WelcomeService *>(context->getService(ref));
+            if (service != Q_NULLPTR)
+                service->welcome();
         }
+    }
+
+    qDebug() << "********************";
+
+    // 2. 使用过滤表达式，获取感兴趣的服务
+    refs = context->getServiceReferences<WelcomeService>("(&(name=CTK))");
+    foreach (ctkServiceReference ref, refs)
+    {
+        if (ref)
+        {
+            WelcomeService *service = qobject_cast<WelcomeService *>(context->getService(ref));
+            if (service != Q_NULLPTR)
+                service->welcome();
+        }
+    }
+
+    qDebug() << "********************";
+
+    // 3. 获取某一个服务（由 Service Ranking 和 Service ID 决定） Qt 的级别高吗？
+    ctkServiceReference ref = context->getServiceReference<WelcomeService>();
+    if (ref)
+    {
+        WelcomeService *service = qobject_cast<WelcomeService *>(context->getService(ref));
+        if (service != Q_NULLPTR)
+            service->welcome();
     }
 
     return app.exec();
