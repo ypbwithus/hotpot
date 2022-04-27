@@ -4,9 +4,9 @@ QT -= gui
 TEMPLATE = lib
 CONFIG += plugin
 TARGET = WelcomeQt
-DESTDIR = $$PWD/../../bin/plugins
+DESTDIR = $$PWD/../../../bin/plugins
 
-include($$PWD/../../lib/libCTK/CTK.pri)
+include($$PWD/../../../lib/libCTK/CTK.pri)
 
 HEADERS += \
     welcome_qt_impl.h \
