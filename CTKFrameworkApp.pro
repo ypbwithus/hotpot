@@ -8,3 +8,4 @@ SUBDIRS += \
     $$PWD/PluginsVegetables/Welcome/WelcomeQt \
     $$PWD/PluginsVegetables/SignalSlot \ 
     $$PWD/PluginsVegetables/SendEvent \
+    $$PWD/PluginsVegetables/RequirePlugin \
