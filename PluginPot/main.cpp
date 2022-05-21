@@ -173,75 +173,76 @@ int main(int argc, char *argv[])
     //     qDebug() << "Failed to start BlogManager" << e.what();
     // }
 
-    // // 启动插件 BlogEventHandlerUsingSlots
-    // try {
-    //     QSharedPointer<ctkPlugin> plugin = context->installPlugin(QUrl::fromLocalFile(path + "/BlogEventHandlerUsingSlots.dll"));
-    //     plugin->start();
-    //     qDebug() << "BlogEventHandlerUsingSlots start ...";
-    // } catch (const ctkPluginException &e) {
-    //     qDebug() << "Failed to start BlogEventHandlerUsingSlots" << e.what();
-    // }
+    // 启动插件 BlogEventHandlerUsingSlots
+    try {
+        QSharedPointer<ctkPlugin> plugin = context->installPlugin(QUrl::fromLocalFile(path + "/BlogEventHandlerUsingSlots.dll"));
+        plugin->start();
+        qDebug() << "BlogEventHandlerUsingSlots start ...";
+    } catch (const ctkPluginException &e) {
+        qDebug() << "Failed to start BlogEventHandlerUsingSlots" << e.what();
+    }
 
-    // // 启动插件 BlogManagerUsingSignals
-    // try {
-    //     QSharedPointer<ctkPlugin> plugin = context->installPlugin(QUrl::fromLocalFile(path + "/BlogManagerUsingSignals.dll"));
-    //     plugin->start();
-    //     qDebug() << "BlogManagerUsingSignals start ...";
-    // } catch (const ctkPluginException &e) {
-    //     qDebug() << "Failed to start BlogManagerUsingSignals" << e.what();
-    // }
+    // 启动插件 BlogManagerUsingSignals
+    try {
+        QSharedPointer<ctkPlugin> plugin = context->installPlugin(QUrl::fromLocalFile(path + "/BlogManagerUsingSignals.dll"));
+        plugin->start();
+        qDebug() << "BlogManagerUsingSignals start ...";
+    } catch (const ctkPluginException &e) {
+        qDebug() << "Failed to start BlogManagerUsingSignals" << e.what();
+    }
 
-    // // 停止插件
-    // ctkPluginFrameworkLauncher::stop();
+    // 停止插件
+    ctkPluginFrameworkLauncher::stop();
 
     // ----------------------------------互相依赖-----------------------------------
-    // 启动插件 A
-    try
-    {
-        QSharedPointer<ctkPlugin> plugin = context->installPlugin(QUrl::fromLocalFile(path + "/PluginA.dll"));
-        plugin->start();
-        qDebug() << "PluginA start ...";
-    }
-    catch (const ctkPluginException &e)
-    {
-        qDebug() << "Failed to start PluginA" << e.what();
-    }
+    // // 启动插件 A
+    // try
+    // {
+    //     QSharedPointer<ctkPlugin> plugin = context->installPlugin(QUrl::fromLocalFile(path + "/PluginA.dll"));
+    //     plugin->start();
+    //     qDebug() << "PluginA start ...";
+    // }
+    // catch (const ctkPluginException &e)
+    // {
+    //     qDebug() << "Failed to start PluginA" << e.what();
+    // }
 
-    // 启动插件 B
-    try
-    {
-        QSharedPointer<ctkPlugin> plugin = context->installPlugin(QUrl::fromLocalFile(path + "/PluginB.dll"));
-        plugin->start();
-        qDebug() << "PluginB start ...";
-    }
-    catch (const ctkPluginException &e)
-    {
-        qDebug() << "Failed to start PluginB" << e.what();
-    }
+    // // 启动插件 B
+    // try
+    // {
+    //     QSharedPointer<ctkPlugin> plugin = context->installPlugin(QUrl::fromLocalFile(path + "/PluginB.dll"));
+    //     plugin->start();
+    //     qDebug() << "PluginB start ...";
+    // }
+    // catch (const ctkPluginException &e)
+    // {
+    //     qDebug() << "Failed to start PluginB" << e.what();
+    // }
 
-    // 获取服务引用
-    ctkServiceReference reference = context->getServiceReference<PluginAService>();
-    if (reference)
-    {
-        // 获取指定 ctkServiceReference 引用的服务对象
-        PluginAService *service = qobject_cast<PluginAService *>(context->getService(reference));
-        if (service != Q_NULLPTR)
-        {
-            // 调用服务
-            service->doSomething();
-        }
-    }
+    // // 获取服务引用
+    // ctkServiceReference reference = context->getServiceReference<PluginAService>();
+    // if (reference)
+    // {
+    //     // 获取指定 ctkServiceReference 引用的服务对象
+    //     PluginAService *service = qobject_cast<PluginAService *>(context->getService(reference));
+    //     if (service != Q_NULLPTR)
+    //     {
+    //         // 调用服务
+    //         service->doSomething();
+    //     }
+    // }
 
-    reference = context->getServiceReference<PluginBService>();
-    if (reference)
-    {
-        // 获取指定 ctkServiceReference 引用的服务对象
-        PluginBService *service = qobject_cast<PluginBService *>(context->getService(reference));
-        if (service != Q_NULLPTR)
-        {
-            // 调用服务
-            service->doSomething();
-        }
-    }
+    // reference = context->getServiceReference<PluginBService>();
+    // if (reference)
+    // {
+    //     // 获取指定 ctkServiceReference 引用的服务对象
+    //     PluginBService *service = qobject_cast<PluginBService *>(context->getService(reference));
+    //     if (service != Q_NULLPTR)
+    //     {
+    //         // 调用服务
+    //         service->doSomething();
+    //     }
+    // }
+
     return app.exec();
 }
