@@ -1,0 +1,8 @@
+Plugin-SymbolicName: Plate
+Plugin-ActivationPolicy: eager
+Plugin-Category: Demos
+Plugin-ContactAddress: https://gitee.com/ypbwithyou/qt-app-cmake
+Plugin-Description: A plugin of Plate 
+Plugin-Name: Plate
+Plugin-Vendor: ypb
+Plugin-Version: 0.0.0

@@ -1,0 +1,6 @@
+<!DOCTYPE RCC>
+<RCC>
+ <qresource prefix="/Plate/META-INF">
+   <file>MANIFEST.MF</file>
+    </qresource>
+</RCC>

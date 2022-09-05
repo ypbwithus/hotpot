@@ -1,0 +1,8 @@
+﻿Plugin-SymbolicName: BlogManager
+Plugin-ActivationPolicy: eager
+Plugin-Category: Demos
+Plugin-ContactAddress: https://github.com/myhhub
+Plugin-Description: A plugin for publish blog
+Plugin-Name: BlogManager
+Plugin-Vendor: myh
+Plugin-Version: 1.0.0
