@@ -33,8 +33,8 @@ int main(int argc, char *argv[])
     SPDINFO(" :) App start !");
 
     // glog
-    logHelper::GetInstance(argv);
-    LOG(INFO) << " :) App start !";
+    // logHelper::GetInstance(argv);
+    // LOG(INFO) << " :) App start !";
 
     // OpenGLStart::GetInstance();
 
