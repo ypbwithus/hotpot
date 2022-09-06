@@ -25,8 +25,6 @@ std::condition_variable main_cond_locker;
 
 int main(int argc, char *argv[])
 {
-    // spdlogHelper::init();
-
     // 初始化LOG
     // spd log
     spdInit();
