@@ -1,12 +1,12 @@
 #include "spdlogHelper.h"
 
-std::shared_ptr<spdlog::logger> consoleLogger;
-std::shared_ptr<spdlog::logger> currentLogger;
+std::shared_ptr<spdlog::logger> consoleLogger = spdlog::rotating_logger_mt("file_log", "logs/spdLog.txt", 1024 * 1024 * 10, 3);
+std::shared_ptr<spdlog::logger> currentLogger = spdlog::stdout_color_mt("console");
 
 int spdInit()
 {
     // 按文件大小
-    currentLogger = spdlog::rotating_logger_mt("file_log", "logs/spdLog.txt", 1024 * 1024 * 10, 3);
+    // currentLogger = spdlog::rotating_logger_mt("file_log", "logs/spdLog.txt", 1024 * 1024 * 10, 3);
 
     // 每天2:30 am 新建一个日志文件
     // currentLogger = spdlog::daily_logger_mt("currentLogger", "logs/spdLog.txt", 2, 30);
@@ -17,7 +17,7 @@ int spdInit()
     spdlog::flush_every(std::chrono::seconds(3));
 
     // Set the default logger to file logger
-    consoleLogger = spdlog::stdout_color_mt("console");
+    // consoleLogger = spdlog::stdout_color_mt("console");
     spdlog::set_default_logger(consoleLogger);
     spdlog::set_level(spdlog::level::trace); // Set global log level to debug
 
@@ -27,8 +27,8 @@ int spdInit()
     // %!：函数名
     spdlog::set_pattern("%Y-%m-%d %H:%M:%S [%l] [%t] - <%s>|<%#>|<%!>,%v");
 
-    SPDINFO("test info");
-    SPDERROR("test error");
+    // SPDINFO("test info");
+    // SPDERROR("test error");
 
     // Release and close all loggers
     spdlog::drop_all();
